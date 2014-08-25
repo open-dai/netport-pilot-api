@@ -1,0 +1,26 @@
+{
+  "name": "netport-pilot-api",
+  "version": "0.0.0",
+  "description": "netport-pilot-api =================",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-dai/netport-pilot-api.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/open-dai/netport-pilot-api/issues"
+  },
+  "dependencies": {
+    "pg": "~3.4.1",
+    "express": "~4.8.5",
+    "js2xmlparser": "~0.1.4",
+    "nodemailer": "~1.2.1",
+    "body-parser": "~1.6.5"
+  }
+}
