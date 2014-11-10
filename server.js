@@ -11,7 +11,7 @@ var port = 8888;
 
 //Image upload
 app.use(multer({
-    dest: 'images_temp/'
+    dest: '.tmp/img/'
 }));
 
 app.all('/*', function(req, res, next) {
@@ -29,7 +29,7 @@ var data = {
 
 /**
  * Variables
- * Connection string: 
+ * Connection string:
  */
 //var dbConn = 'pg://user:user@194.116.110.159:35432/ReportsVDB';
 
@@ -70,7 +70,7 @@ connection.connect();
 
 function queryDB(query, callback) {
     'use strict';
-    
+
     connection.query(query, function(err, rows) {
         if (err) {
             throw err;
@@ -91,7 +91,7 @@ app.post('/api/reports', function(req, res){
     if(req.files.file) {
         img = req.files.file.name;
     }
-    
+
 
     queryDB('SELECT Reports.types.title AS type FROM Reports.types WHERE Reports.types.id = '+data.type_id+'', function(result){
         data.type = result[0].type;
@@ -136,12 +136,12 @@ app.post('/api/reports', function(req, res){
 
 app.get('/img/:filename', function(req, res){
     'use strict';
-    res.sendFile(__dirname+'/images_temp/'+req.params.filename);
+    res.sendFile(__dirname+'/.tmp/img/'+req.params.filename);
 });
 
 app.get('/api/reports', function(req, res){
     'use strict';
-    
+
     queryDB('SELECT Reports.reports.*, Reports.types.title AS type, Reports.status.title AS status FROM Reports.reports INNER JOIN Reports.types ON Reports.reports.types_id = Reports.types.id INNER JOIN Reports.status ON Reports.reports.status_id = Reports.status.id ORDER BY Reports.reports.added DESC', function(result){
         data.reports = result;
         res.status(200).send(data);
